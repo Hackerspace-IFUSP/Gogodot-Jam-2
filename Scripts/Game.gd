@@ -11,6 +11,7 @@ var currency = 0
 
 
 func _ready():
+####FNF ready####
 	$FNF/timers/timer_l.wait_time = rand_range(1,3)
 	$FNF/timers/timer_d.wait_time = rand_range(1,3)
 	$FNF/timers/timer_u.wait_time = rand_range(1,3)
@@ -19,19 +20,19 @@ func _ready():
 	$FNF/timers/timer_d.start()
 	$FNF/timers/timer_u.start()
 	$FNF/timers/timer_r.start()
+####################
 
-	
-	
+
 func _process(delta):
-	$FNF/Points.text = str(points)
+	
+####FNF Process####
+	
 	buttons()
-	
-	
-	$FNF/Turbine.speed_scale = int(points/40)
-	$FNF/City.speed_scale = int(points/200)
-	if points <= 0:
-		points = 0
+	points_update()
 
+####################
+
+####FNF Funcs####
 
 func buttons():
 	if Input.is_action_just_pressed("ui_left") and $FNF/Notes/Left.scale == Vector2(.3,.3):
@@ -73,10 +74,76 @@ func buttons():
 		$FNF/Notes/Right.scale -= Vector2(.01,.01)
 		if $FNF/Notes/Right.scale <= Vector2(.290,2.90):
 			$FNF/Notes/Right.scale = Vector2(.3,.3)
+
+func points_update():
+	$FNF/Points.text = str("points: ", points)
+	$FNF/Turbine.speed_scale = int(points/40)
+	$FNF/City.speed_scale = int(points/200)
+	if points <= 0:
+		points = 0
 			
+func _on_area_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):
+	if area.is_in_group("note"):
+		## pode ser usado em sistema de pontuação do tipo
+		# se abs =< x, critico, se x <= abse < y, ok 
+		#print(abs(self.global_position.y - area.global_position.y))
+		points += 10 
+		area.queue_free()
+		
+func _on_Killzone_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):
+	if area.is_in_group("note"):
+		points -= 30
+		area.queue_free()
+
+####################
+
+####Menu Funcs####
+func _on_menu_button_pressed():
+	$Menu/transition.play("event2")
+	yield($Menu/transition, "animation_finished")
+	$Next_day/transition.play("event2")
+	points = 0
+	$FNF/ready_timer.start()
+	status = ready
 	
+func _on_solar_panel_pressed():
+	$Menu/upgrades/Animations/Solar_panel.play("event")
+	$Menu/upgrades/Buttons/solar_panel.disabled = true
+	yield($Menu/upgrades/Animations/Solar_panel,"animation_finished")
+	$Menu/upgrades/Animations/Solar_panel.queue_free()
+	$Menu/upgrades/Buttons/solar_panel.queue_free()
+	$Menu/upgrades/Graphics/Solar_panel.playing = true
+	
+func _on_Hydrelectric_pressed():
+	$Menu/upgrades/Animations/Hydroelectric.play("event")
+	$Menu/upgrades/Buttons/Hydrelectric.disabled = true
+	yield($Menu/upgrades/Animations/Hydroelectric,"animation_finished")
+	$Menu/upgrades/Animations/Hydroelectric.queue_free()
+	$Menu/upgrades/Buttons/Hydrelectric.queue_free()
+	$Menu/upgrades/Graphics/Hydroelectric.playing = true
 
 
+func _on_Reactor_pressed():
+	$Menu/upgrades/Animations/Reactor.play("event")
+	$Menu/upgrades/Buttons/Reactor.disabled = true
+	yield($Menu/upgrades/Animations/Reactor,"animation_finished")
+	$Menu/upgrades/Animations/Reactor.queue_free()
+	$Menu/upgrades/Buttons/Reactor.queue_free()
+	$Menu/upgrades/Graphics/Reactor.playing = true
+
+
+####################
+
+####Next day Funcs ####
+func _on_netx_day_button_pressed():
+	$Menu/transition.play("event")
+	#$Next_day/transition.play("event2")
+	#yield($Next_day/transition, "animation_finished")
+	#$Menu/transition.play("event2")
+
+####################
+
+####FNF Timers####
 func _on_timer_l_timeout():
 	if status == ready: 
 		var nt = note.instance()
@@ -116,15 +183,6 @@ func _on_timer_r_timeout():
 		$FNF/timers/timer_r.wait_time = rand_range(1,3)
 
 
-func _on_area_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):
-	if area.is_in_group("note"):
-		## pode ser usado em sistema de pontuação do tipo
-		# se abs =< x, critico, se x <= abse < y, ok 
-		print(abs(self.global_position.y - area.global_position.y))
-		points += 10 
-		area.queue_free()
-
-
 func _on_left_timer_timeout():
 	$FNF/Notes/Left/area/shape.disabled = true
 
@@ -138,27 +196,15 @@ func _on_right_timer_timeout():
 	$FNF/Notes/Right/area/shape.disabled = true
 
 
-func _on_Killzone_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):
-	if area.is_in_group("note"):
-		points -= 30
-		area.queue_free()
-
-
-
 func _on_ready_timer_timeout():
 	status = paused
 	$FNF/transition_timer.start()
 
-
-func _on_menu_button_pressed():
-	$Next_day/transition.play("event")
-
-
-func _on_netx_day_button_pressed():
-	$Next_day/transition.play("event2")
-	yield($Next_day/transition, "animation_finished")
-	$Menu/transition.play("event2")
-
-
 func _on_transition_timer_timeout():
-	$Menu/transition.play("event")
+	$Next_day/transition.play("event")
+	
+
+####################
+
+
+
