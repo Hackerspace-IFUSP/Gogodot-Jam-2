@@ -94,6 +94,9 @@ func _on_timer_r_timeout():
 
 func _on_area_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):
 	if area.is_in_group("note"):
+		## pode ser usado em sistema de pontuação do tipo
+		# se abs =< x, critico, se x <= abse < y, ok 
+		print(abs(self.global_position.y - area.global_position.y))
 		area.queue_free()
 
 
