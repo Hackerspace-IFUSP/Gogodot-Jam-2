@@ -1,6 +1,7 @@
 extends Node2D
 
 var note = preload("res://Scenes/Note.tscn")
+onready var ok = preload("res://Scenes/Ok.tscn")
 var points = 0
 
 enum{ready,paused}
@@ -91,6 +92,9 @@ func points_update():
 func _on_area_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):
 	if area.is_in_group("note"):
 		points += 10 
+		var correct = ok.instance()
+		correct.global_position = area.global_position
+		add_child(correct)
 		area.queue_free()
 		
 func _on_Killzone_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):
