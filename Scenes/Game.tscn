@@ -14,7 +14,7 @@
 [ext_resource path="res://Scenes/Solar_panel.tscn" type="PackedScene" id=12]
 
 [sub_resource type="DynamicFont" id=15]
-size = 32
+size = 24
 outline_size = 1
 outline_color = Color( 0, 0, 1, 1 )
 font_data = ExtResource( 6 )
@@ -395,7 +395,7 @@ __meta__ = {
 
 [node name="City" parent="FNF" instance=ExtResource( 1 )]
 position = Vector2( 352, 622 )
-frame = 3
+frame = 0
 
 [node name="Turbine" parent="FNF" instance=ExtResource( 7 )]
 position = Vector2( 715, 346 )
@@ -493,7 +493,7 @@ wait_time = 3.0
 one_shot = true
 
 [node name="ready_timer" type="Timer" parent="FNF"]
-wait_time = 5.0
+wait_time = 60.0
 one_shot = true
 autostart = true
 
@@ -810,6 +810,32 @@ custom_fonts/font = SubResource( 17 )
 text = "Menu"
 align = 1
 valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Money" type="Label" parent="Menu"]
+margin_left = 7.0
+margin_top = 46.0
+margin_right = 119.0
+margin_bottom = 79.0
+custom_colors/font_color = Color( 0, 0, 1, 1 )
+custom_fonts/font = SubResource( 15 )
+text = "Cashcoin: 0"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HUD" type="Node2D" parent="."]
+
+[node name="Day" type="Label" parent="HUD"]
+margin_left = 731.0
+margin_top = 38.0
+margin_right = 812.0
+margin_bottom = 71.0
+custom_colors/font_color = Color( 0, 0, 1, 1 )
+custom_fonts/font = SubResource( 15 )
+text = "Day: 0"
 __meta__ = {
 "_edit_use_anchors_": false
 }
