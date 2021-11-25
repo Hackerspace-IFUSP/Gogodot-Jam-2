@@ -395,10 +395,10 @@ __meta__ = {
 
 [node name="City" parent="FNF" instance=ExtResource( 1 )]
 position = Vector2( 352, 622 )
-frame = 0
 
 [node name="Turbine" parent="FNF" instance=ExtResource( 7 )]
 position = Vector2( 715, 346 )
+frame = 2
 
 [node name="Notes" type="Node2D" parent="FNF"]
 
@@ -588,7 +588,7 @@ grow_horizontal = 2
 grow_vertical = 2
 custom_colors/font_color = Color( 0, 0, 1, 1 )
 custom_fonts/font = SubResource( 24 )
-text = "Godot coins earned: 0000"
+text = "U coins earned: 0000"
 align = 1
 valign = 1
 __meta__ = {

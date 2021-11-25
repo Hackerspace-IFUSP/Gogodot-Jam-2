@@ -254,7 +254,7 @@ func _on_transition_timer_timeout():
 	coin += day_coin + bonus
 	$Next_day/Report/Energy_earned.text = str("Energy earned: ", energy, " MWh")
 	$Next_day/Report/Bonus.text = str("Bonus: ", bonus, " MWh")
-	$Next_day/Report/Godotcoin.text = str("Godot coins earned: ", day_coin)
+	$Next_day/Report/Godotcoin.text = str("U coins earned: ", day_coin)
 	$Next_day/transition.play("event")
 	$Next_day/Report/Total.text = str("Total: ", coin)
 	$Menu/Money.text = str("Cashcoin: ", coin)
