@@ -1,6 +1,6 @@
 extends Area2D
 
-var speed = Vector2(0,-300)
+var speed = Vector2(0,-400)
 enum{right_key, left_key, up_key, down_key}
 var key = right_key
 enum{out_key,on_key}

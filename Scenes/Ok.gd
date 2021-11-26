@@ -12,6 +12,5 @@ func _ready():
 
 func _process(delta):
 	if $Particles2D.emitting == false:
-		print("saiu")
 		queue_free()
 		

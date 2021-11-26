@@ -13,11 +13,16 @@ var coin = 0
 var day = 0 
 var bonus = 0
 
+enum{on_keys,out_keys}
+var keys = on_keys
+
+
 enum{level_1,level_2,level_3}
 var level = level_1
 
 func _ready():
 ####FNF ready####
+	$transition.play("event")
 	$FNF/timers/timer_l.wait_time = rand_range(1,3)
 	$FNF/timers/timer_d.wait_time = rand_range(1,3)
 	$FNF/timers/timer_u.wait_time = rand_range(1,3)
@@ -33,7 +38,9 @@ func _process(delta):
 	
 ####FNF Process####
 	
-	buttons()
+	if keys == on_keys:
+		buttons()
+		
 	points_update()
 
 ####################
@@ -113,8 +120,9 @@ func _on_menu_button_pressed():
 	points = 0
 	day += 1
 	status = ready
+	keys = on_keys
 	
-func _on_solar_panel_pressed():
+func _on_solar_panel_pressed(): 
 	if coin >= 100:
 		coin -= 100
 		bonus += 10
@@ -126,12 +134,16 @@ func _on_solar_panel_pressed():
 		$Menu/upgrades/Buttons/solar_panel.queue_free()
 		$Menu/upgrades/Graphics/Solar_panel.playing = true
 		$Menu/Money.text = str("Cashcoin: ", coin)
+		$Diolog.show()
+		$Diolog.pause = $Diolog.paused
+		$Diolog.dialog = $Diolog.text1
+		$Diolog.load_dialog()
 	else:
 		pass
 	
 func _on_Hydrelectric_pressed():
-	if coin >= 500:
-		coin -= 500
+	if coin >= 300:
+		coin -= 300
 		bonus += 30
 		level = level_3
 		$Menu/upgrades/Animations/Hydroelectric.play("event")
@@ -140,11 +152,16 @@ func _on_Hydrelectric_pressed():
 		$Menu/upgrades/Animations/Hydroelectric.queue_free()
 		$Menu/upgrades/Buttons/Hydrelectric.queue_free()
 		$Menu/upgrades/Graphics/Hydroelectric.playing = true
+		$Menu/Money.text = str("Cashcoin: ", coin)
+		$Diolog.show()
+		$Diolog.pause = $Diolog.paused
+		$Diolog.dialog = $Diolog.text2
+		$Diolog.load_dialog()
 
 
 func _on_Reactor_pressed():
-	if coin >= 2000:
-		coin -= 2000
+	if coin >= 1000:
+		coin -= 1000
 		bonus += 500
 		$Menu/upgrades/Animations/Reactor.play("event")
 		$Menu/upgrades/Buttons/Reactor.disabled = true
@@ -152,6 +169,11 @@ func _on_Reactor_pressed():
 		$Menu/upgrades/Animations/Reactor.queue_free()
 		$Menu/upgrades/Buttons/Reactor.queue_free()
 		$Menu/upgrades/Graphics/Reactor.playing = true
+		$Menu/Money.text = str("Cashcoin: ", coin)
+		$Diolog.show()
+		$Diolog.pause = $Diolog.paused
+		$Diolog.dialog = $Diolog.text3
+		$Diolog.load_dialog()
 
 
 ####################
@@ -171,11 +193,11 @@ func _on_timer_l_timeout():
 		nt.rotation_degrees = 90
 		add_child(nt)
 		if level == level_1:
-			$FNF/timers/timer_l.wait_time = rand_range(1,3)
+			$FNF/timers/timer_l.wait_time = rand_range(2,3.5)
 		elif level == level_2:
-			$FNF/timers/timer_l.wait_time = rand_range(.8,2.5)
+			$FNF/timers/timer_l.wait_time = rand_range(1,3)
 		elif level == level_3:
-			$FNF/timers/timer_l.wait_time = rand_range(.5,2)
+			$FNF/timers/timer_l.wait_time = rand_range(.8,2.5)
 
 
 func _on_timer_d_timeout():
@@ -186,11 +208,11 @@ func _on_timer_d_timeout():
 		nt.rotation_degrees = 0
 		add_child(nt)
 		if level == level_1:
-			$FNF/timers/timer_d.wait_time = rand_range(1,3)
+			$FNF/timers/timer_l.wait_time = rand_range(2,3.5)
 		elif level == level_2:
-			$FNF/timers/timer_d.wait_time = rand_range(.8,2.5)
+			$FNF/timers/timer_l.wait_time = rand_range(1,3)
 		elif level == level_3:
-			$FNF/timers/timer_d.wait_time = rand_range(.6,1.8)
+			$FNF/timers/timer_l.wait_time = rand_range(.8,2.5)
 
 func _on_timer_u_timeout():
 	if status == ready:
@@ -200,11 +222,11 @@ func _on_timer_u_timeout():
 		nt.rotation_degrees = 180
 		add_child(nt)
 		if level == level_1:
-			$FNF/timers/timer_u.wait_time = rand_range(1,3)
+			$FNF/timers/timer_l.wait_time = rand_range(2,3.5)
 		elif level == level_2:
-			$FNF/timers/timer_u.wait_time = rand_range(.8,2.5)
+			$FNF/timers/timer_l.wait_time = rand_range(1,3)
 		elif level == level_3:
-			$FNF/timers/timer_u.wait_time = rand_range(.6,1.8)
+			$FNF/timers/timer_l.wait_time = rand_range(.8,2.5)
 
 
 func _on_timer_r_timeout():
@@ -215,11 +237,11 @@ func _on_timer_r_timeout():
 		nt.rotation_degrees = -90
 		add_child(nt)
 		if level == level_1:
-			$FNF/timers/timer_r.wait_time = rand_range(1,3)
+			$FNF/timers/timer_l.wait_time = rand_range(2,3.5)
 		elif level == level_2:
-			$FNF/timers/timer_r.wait_time = rand_range(.8,2.5)
+			$FNF/timers/timer_l.wait_time = rand_range(1,3)
 		elif level == level_3:
-			$FNF/timers/timer_r.wait_time = rand_range(.6,1.8)
+			$FNF/timers/timer_l.wait_time = rand_range(.8,2.5)
 
 
 func _on_left_timer_timeout():
@@ -241,14 +263,15 @@ func _on_ready_timer_timeout():
 
 func _on_transition_timer_timeout():
 	energy = points
+	keys = out_keys
 	if level == level_1:
-		day_coin = int(rand_range(0.06 * energy, .1*energy))
+		day_coin = int(rand_range(0.1 * energy, .15*energy))
 		
 	elif level == level_2:
-		day_coin = 2*int(rand_range(0.06 * energy, .1*energy))
+		day_coin = 2*int(rand_range(0.1 * energy, .15*energy))
 
 	elif level == level_3:
-		day_coin = 3*int(rand_range(0.06 * energy, .1*energy))
+		day_coin = 3*int(rand_range(0.1 * energy, .15*energy))
 		
 		
 	coin += day_coin + bonus
@@ -260,6 +283,4 @@ func _on_transition_timer_timeout():
 	$Menu/Money.text = str("Cashcoin: ", coin)
 
 ####################
-
-
 

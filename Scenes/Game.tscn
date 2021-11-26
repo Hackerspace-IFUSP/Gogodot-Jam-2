@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=36 format=2]
 
 [ext_resource path="res://Scenes/City.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Sprites/Objects/seta.png" type="Texture" id=2]
@@ -12,6 +12,8 @@
 [ext_resource path="res://Scenes/Hydroelectric.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scenes/Reactor.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Scenes/Solar_panel.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Scripts/Diolog.gd" type="Script" id=14]
+[ext_resource path="res://Sprites/Objects/Text_box_kid.png" type="Texture" id=15]
 
 [sub_resource type="DynamicFont" id=15]
 size = 24
@@ -371,7 +373,45 @@ tracks/2/keys = {
 "values": [ Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 1 ), Color( 1, 1, 1, 0 ) ]
 }
 
+[sub_resource type="DynamicFont" id=6]
+size = 32
+outline_size = 1
+outline_color = Color( 0, 0, 1, 1 )
+font_data = ExtResource( 6 )
+
+[sub_resource type="Animation" id=25]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 1 ) ]
+}
+
+[sub_resource type="Animation" id=26]
+resource_name = "event"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Color( 0, 0, 0, 1 ), Color( 1, 1, 1, 1 ) ]
+}
+
 [node name="Game" type="Node2D"]
+modulate = Color( 0, 0, 0, 1 )
 script = ExtResource( 9 )
 
 [node name="FNF" type="Node2D" parent="."]
@@ -395,6 +435,7 @@ __meta__ = {
 
 [node name="City" parent="FNF" instance=ExtResource( 1 )]
 position = Vector2( 352, 622 )
+frame = 3
 
 [node name="Turbine" parent="FNF" instance=ExtResource( 7 )]
 position = Vector2( 715, 346 )
@@ -489,7 +530,7 @@ position = Vector2( 405, -173 )
 shape = SubResource( 8 )
 
 [node name="transition_timer" type="Timer" parent="FNF"]
-wait_time = 3.0
+wait_time = 5.0
 one_shot = true
 
 [node name="ready_timer" type="Timer" parent="FNF"]
@@ -698,7 +739,7 @@ margin_right = 352.333
 margin_bottom = -320.0
 custom_colors/font_color = Color( 0, 0, 1, 1 )
 custom_fonts/font = SubResource( 16 )
-text = "Bail: 500"
+text = "Bail: 300"
 align = 1
 valign = 1
 __meta__ = {
@@ -717,7 +758,7 @@ margin_right = 352.333
 margin_bottom = -320.0
 custom_colors/font_color = Color( 0, 0, 1, 1 )
 custom_fonts/font = SubResource( 16 )
-text = "Bail: 2000"
+text = "Bail: 1000"
 align = 1
 valign = 1
 __meta__ = {
@@ -840,6 +881,79 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Diolog" type="Node2D" parent="."]
+pause_mode = 2
+script = ExtResource( 14 )
+
+[node name="Control" type="Control" parent="Diolog"]
+margin_right = 40.0
+margin_bottom = 40.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Dialog_box" type="Control" parent="Diolog/Control"]
+margin_left = 3.0
+margin_top = 506.0
+margin_right = 782.0
+margin_bottom = 780.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextBoxKid" type="Sprite" parent="Diolog/Control/Dialog_box"]
+position = Vector2( 397, 139 )
+texture = ExtResource( 15 )
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Diolog/Control/Dialog_box"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 16.0
+margin_top = 12.0
+margin_right = -7.0
+margin_bottom = -9.0
+grow_horizontal = 0
+custom_colors/default_color = Color( 0, 0, 1, 1 )
+custom_fonts/normal_font = SubResource( 6 )
+text = "action!"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Tween" type="Tween" parent="Diolog/Control/Dialog_box"]
+
+[node name="sfx" type="AudioStreamPlayer2D" parent="Diolog/Control"]
+attenuation = 0.378929
+
+[node name="dialogue_timer" type="Timer" parent="Diolog/Control"]
+wait_time = 2.0
+one_shot = true
+
+[node name="Next" parent="Diolog" instance=ExtResource( 4 )]
+margin_left = 605.0
+margin_top = 694.0
+margin_right = 779.0
+margin_bottom = 786.0
+
+[node name="text" type="Label" parent="Diolog/Next"]
+margin_left = 34.0
+margin_top = 14.0
+margin_right = 151.0
+margin_bottom = 47.0
+custom_colors/font_color = Color( 0, 0, 1, 1 )
+custom_fonts/font = SubResource( 15 )
+text = "Next"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="transition" type="AnimationPlayer" parent="."]
+pause_mode = 2
+anims/RESET = SubResource( 25 )
+anims/event = SubResource( 26 )
+
 [connection signal="area_shape_entered" from="FNF/Notes/Left/area" to="." method="_on_area_area_shape_entered"]
 [connection signal="timeout" from="FNF/Notes/Left/left_timer" to="." method="_on_left_timer_timeout"]
 [connection signal="area_shape_entered" from="FNF/Notes/Down/area" to="." method="_on_area_area_shape_entered"]
@@ -860,3 +974,5 @@ __meta__ = {
 [connection signal="pressed" from="Menu/upgrades/Buttons/solar_panel" to="." method="_on_solar_panel_pressed"]
 [connection signal="pressed" from="Menu/upgrades/Buttons/Hydrelectric" to="." method="_on_Hydrelectric_pressed"]
 [connection signal="pressed" from="Menu/upgrades/Buttons/Reactor" to="." method="_on_Reactor_pressed"]
+[connection signal="timeout" from="Diolog/Control/dialogue_timer" to="Diolog/Control/Dialog_box" method="_on_dialogue_timer_timeout"]
+[connection signal="pressed" from="Diolog/Next" to="Diolog" method="_on_Next_pressed"]
