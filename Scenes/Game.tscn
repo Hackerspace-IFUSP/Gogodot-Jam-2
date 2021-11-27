@@ -435,11 +435,9 @@ __meta__ = {
 
 [node name="City" parent="FNF" instance=ExtResource( 1 )]
 position = Vector2( 352, 622 )
-frame = 3
 
 [node name="Turbine" parent="FNF" instance=ExtResource( 7 )]
 position = Vector2( 715, 346 )
-frame = 2
 
 [node name="Notes" type="Node2D" parent="FNF"]
 
@@ -520,7 +518,7 @@ wait_time = 0.05
 [node name="Wind" parent="FNF" instance=ExtResource( 5 )]
 position = Vector2( 77, 286 )
 scale = Vector2( 0.4, 0.4 )
-frame = 2
+frame = 0
 
 [node name="Killzone" type="Area2D" parent="FNF"]
 position = Vector2( -1, 2 )

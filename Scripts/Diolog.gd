@@ -13,24 +13,31 @@ var button = not_pressed
 var dialog
 
 onready var text0 = [
-	"Plot0",
-	"Plot0",
-	"Plot0",
-	"Plot0"
+	"Neil: Captain! Captain! Something terrible came about!",
+	"''What happun?",
+	"Neil: The police stumbled upon us. They speak about illegal blocks used in the construction of the power plants!", 
+	"Neil: Some tall blokes took all the plants to the prison themselves. Except for the wind powered, this one is legit.",
+	"''I knew the cops would find out… But I swear, those blocks are completely safe!",
+	"''It is so unfair that they are forbidden to use in power plants. What do we do?",
+	"Neil: We can mine UCOIN and pay the fine to free the power plants.",
+	"Neil: However, there is a catch. The fans are acting up and the power is not increasing according.",
+	"''In layman terms, please!",
+	"Neil: Of course, captain. We need someone to keep the fans on the rhythm of the beat to max the energy gain.",
+	"Neil: Only you can do that, captain.",
+	"Leave it to me! We are making some UCOIN!"
 ]
 
 onready var text1 = [
-	"Plot1",
-	"Plot1",
-	"Plot1",
-	"Plot1"
+	"Sabrina: ...and that’s why solar is my favourite! It has everything!",
+	"Miyamoto: What’s the fun if there is no fan? I think it is pretty silly. They stay there without moving. Boring. You know what have fans? GPUs! GPUs are awesome! You can use them to game, but only kids do that. Real man use them to mine some sweet UCOIN!",
+	"Mrs. Reneé: And where does the energy to power the GPUs come frooom?",
+	"Miyamoto: Well… nevermind!"
 ]
 
 onready var text2 = [
-	"Plot2",
-	"Plot2",
-	"Plot2",
-	"Plot2"
+	"Mrs. Reneé: So, we need to phase out fossil fuel power plants ASAP!",
+	"Sabrina: Yay!",
+	"Miyamoto: But, but, I don’t get it! Can’t we just have enough money to buy like, a lot of carbon cleaning stuff? I bet that with many oil plants feeding enough GPUs we could get lots and lots of UCOIN! And then and them…",
 ]
 
 onready var text3 = [
