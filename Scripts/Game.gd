@@ -4,6 +4,8 @@ var note = preload("res://Scenes/Note.tscn")
 onready var ok = preload("res://Scenes/Ok.tscn")
 var points = 0
 
+
+
 enum{ready,paused}
 var status = ready
 
@@ -32,10 +34,18 @@ func _ready():
 	$FNF/timers/timer_u.start()
 	$FNF/timers/timer_r.start()
 ####################
+	$HUD/TimeLeft.text = str(int($FNF/ready_timer.time_left) + 1)
+	
 
 
 func _process(delta):
 	
+################# timer
+	$HUD/TimeLeft.text = str(int($FNF/ready_timer.time_left) + 1)
+	
+
+
+
 ####FNF Process####
 	
 	if keys == on_keys:
@@ -52,6 +62,7 @@ func buttons():
 		$FNF/Notes/Left/area/shape.disabled = false
 		$FNF/Notes/Left/left_timer.start()
 		$FNF/Notes/Left.scale += Vector2(.1,.1)
+		$FNF/Notes/Left/AudioStreamPlayer.play()
 		points -= 5
 	if $FNF/Notes/Left.scale != Vector2(.3,.3):
 		$FNF/Notes/Left.scale -= Vector2(.01,.01)
@@ -62,6 +73,7 @@ func buttons():
 		$FNF/Notes/Down/area/shape.disabled = false
 		$FNF/Notes/Down/down_timer.start()
 		$FNF/Notes/Down.scale += Vector2(.1,.1)
+		$FNF/Notes/Down/AudioStreamPlayer.play()
 		points -= 5
 	if $FNF/Notes/Down.scale != Vector2(.3,.3):
 		$FNF/Notes/Down.scale -= Vector2(.01,.01)
@@ -72,6 +84,7 @@ func buttons():
 		$FNF/Notes/Up/area/shape.disabled = false
 		$FNF/Notes/Up/up_timer.start()
 		$FNF/Notes/Up.scale += Vector2(.1,.1)
+		$FNF/Notes/Up/AudioStreamPlayer.play()
 		points -= 5
 	if $FNF/Notes/Up.scale != Vector2(.3,.3):
 		$FNF/Notes/Up.scale -= Vector2(.01,.01)
@@ -82,6 +95,7 @@ func buttons():
 		$FNF/Notes/Right/area/shape.disabled = false
 		$FNF/Notes/Right/right_timer.start()
 		$FNF/Notes/Right.scale += Vector2(.1,.1)
+		$FNF/Notes/Right/AudioStreamPlayer.play()
 		points -= 5
 	if $FNF/Notes/Right.scale != Vector2(.3,.3):
 		$FNF/Notes/Right.scale -= Vector2(.01,.01)
@@ -98,7 +112,7 @@ func points_update():
 			
 func _on_area_area_shape_entered(area_rid, area, area_shape_index, local_shape_index):
 	if area.is_in_group("note"):
-		points += 10 
+		points += 15 
 		var correct = ok.instance()
 		correct.global_position = area.global_position
 		add_child(correct)
@@ -191,6 +205,7 @@ func _on_timer_l_timeout():
 		nt.global_position = Vector2(175,880)
 		nt.key = nt.left_key
 		nt.rotation_degrees = 90
+		
 		add_child(nt)
 		if level == level_1:
 			$FNF/timers/timer_l.wait_time = rand_range(2,3.5)
@@ -281,6 +296,7 @@ func _on_transition_timer_timeout():
 	$Next_day/transition.play("event")
 	$Next_day/Report/Total.text = str("Total: ", coin)
 	$Menu/Money.text = str("Cashcoin: ", coin)
+	$FNF/Notes.modulate = Color(1,1,1,0)
 
 ####################
 

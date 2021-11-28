@@ -90,3 +90,9 @@ func _on_dialogue_timer_timeout():
 
 func _on_Next_pressed():
 	button = pressed
+
+
+
+
+func _on_Skip_pressed():
+	get_tree().change_scene("res://Scenes/Game.tscn")

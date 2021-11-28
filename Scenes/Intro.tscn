@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Scripts/Diolog_intro.gd" type="Script" id=1]
 [ext_resource path="res://Fonts/Kid_Font_.ttf" type="DynamicFontData" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://Sprites/Objects/reactor0000.png" type="Texture" id=7]
 [ext_resource path="res://Sprites/Objects/sun0000.png" type="Texture" id=8]
 [ext_resource path="res://Dialog_system/fonts/GOUDYSTO.TTF" type="DynamicFontData" id=9]
+[ext_resource path="res://Scenes/Button.tscn" type="PackedScene" id=10]
 
 [sub_resource type="DynamicFont" id=16]
 size = 60
@@ -211,4 +212,23 @@ pause_mode = 2
 anims/RESET = SubResource( 19 )
 anims/event = SubResource( 20 )
 
+[node name="Skip" parent="." instance=ExtResource( 10 )]
+margin_top = 698.0
+margin_bottom = 790.0
+
+[node name="Wind6" type="Label" parent="Skip"]
+margin_left = -295.0
+margin_right = 47.0
+margin_bottom = 100.0
+custom_colors/font_color = Color( 1, 0, 0, 1 )
+custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
+custom_fonts/font = SubResource( 16 )
+text = "Skip intro"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [connection signal="timeout" from="Diolog/Control/dialogue_timer" to="Diolog" method="_on_dialogue_timer_timeout"]
+[connection signal="pressed" from="Skip" to="Diolog" method="_on_Skip_pressed"]

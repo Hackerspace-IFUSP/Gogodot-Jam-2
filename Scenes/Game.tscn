@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=2]
+[gd_scene load_steps=38 format=2]
 
 [ext_resource path="res://Scenes/City.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Sprites/Objects/seta.png" type="Texture" id=2]
@@ -12,8 +12,10 @@
 [ext_resource path="res://Scenes/Hydroelectric.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scenes/Reactor.tscn" type="PackedScene" id=11]
 [ext_resource path="res://Scenes/Solar_panel.tscn" type="PackedScene" id=12]
+[ext_resource path="res://music/8bit-Bossa.ogg" type="AudioStream" id=13]
 [ext_resource path="res://Scripts/Diolog.gd" type="Script" id=14]
 [ext_resource path="res://Sprites/Objects/Text_box_kid.png" type="Texture" id=15]
+[ext_resource path="res://music/ping_pong_8bit_beeep.ogg" type="AudioStream" id=16]
 
 [sub_resource type="DynamicFont" id=15]
 size = 24
@@ -435,6 +437,7 @@ __meta__ = {
 
 [node name="City" parent="FNF" instance=ExtResource( 1 )]
 position = Vector2( 352, 622 )
+frame = 0
 
 [node name="Turbine" parent="FNF" instance=ExtResource( 7 )]
 position = Vector2( 715, 346 )
@@ -457,6 +460,9 @@ disabled = true
 [node name="left_timer" type="Timer" parent="FNF/Notes/Left"]
 wait_time = 0.05
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="FNF/Notes/Left"]
+stream = ExtResource( 16 )
+
 [node name="Down" type="Sprite" parent="FNF/Notes"]
 position = Vector2( 325, 100 )
 scale = Vector2( 0.3, 0.3 )
@@ -471,6 +477,10 @@ disabled = true
 
 [node name="down_timer" type="Timer" parent="FNF/Notes/Down"]
 wait_time = 0.05
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="FNF/Notes/Down"]
+stream = ExtResource( 16 )
+pitch_scale = 2.0
 
 [node name="Up" type="Sprite" parent="FNF/Notes"]
 position = Vector2( 475, 100 )
@@ -487,6 +497,10 @@ disabled = true
 
 [node name="up_timer" type="Timer" parent="FNF/Notes/Up"]
 wait_time = 0.05
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="FNF/Notes/Up"]
+stream = ExtResource( 16 )
+pitch_scale = 1.25
 
 [node name="Right" type="Sprite" parent="FNF/Notes"]
 position = Vector2( 625, 100 )
@@ -505,6 +519,10 @@ disabled = true
 [node name="right_timer" type="Timer" parent="FNF/Notes/Right"]
 wait_time = 0.05
 
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="FNF/Notes/Right"]
+stream = ExtResource( 16 )
+pitch_scale = 1.5
+
 [node name="timers" type="Node" parent="FNF"]
 
 [node name="timer_l" type="Timer" parent="FNF/timers"]
@@ -518,7 +536,7 @@ wait_time = 0.05
 [node name="Wind" parent="FNF" instance=ExtResource( 5 )]
 position = Vector2( 77, 286 )
 scale = Vector2( 0.4, 0.4 )
-frame = 0
+frame = 3
 
 [node name="Killzone" type="Area2D" parent="FNF"]
 position = Vector2( -1, 2 )
@@ -879,6 +897,32 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="TimeLeft2" type="Label" parent="HUD"]
+margin_left = 546.0
+margin_top = 9.0
+margin_right = 719.0
+margin_bottom = 42.0
+custom_colors/font_color = Color( 0, 0, 1, 1 )
+custom_fonts/font = SubResource( 15 )
+text = "time to next day:"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TimeLeft" type="Label" parent="HUD"]
+margin_left = 669.0
+margin_top = 9.0
+margin_right = 842.0
+margin_bottom = 42.0
+custom_colors/font_color = Color( 0, 0, 1, 1 )
+custom_fonts/font = SubResource( 15 )
+text = "[60]"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Diolog" type="Node2D" parent="."]
 pause_mode = 2
 script = ExtResource( 14 )
@@ -951,6 +995,10 @@ __meta__ = {
 pause_mode = 2
 anims/RESET = SubResource( 25 )
 anims/event = SubResource( 26 )
+
+[node name="Bkg" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 13 )
+autoplay = true
 
 [connection signal="area_shape_entered" from="FNF/Notes/Left/area" to="." method="_on_area_area_shape_entered"]
 [connection signal="timeout" from="FNF/Notes/Left/left_timer" to="." method="_on_left_timer_timeout"]

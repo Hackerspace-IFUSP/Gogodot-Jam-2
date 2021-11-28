@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/8bit-Bossa.ogg-e7032ce4891450e81fd7658b56d8311f.oggstr"
+
+[deps]
+
+source_file="res://music/8bit-Bossa.ogg"
+dest_files=[ "res://.import/8bit-Bossa.ogg-e7032ce4891450e81fd7658b56d8311f.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0
