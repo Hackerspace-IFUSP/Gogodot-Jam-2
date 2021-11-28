@@ -296,7 +296,7 @@ func _on_transition_timer_timeout():
 	$Next_day/transition.play("event")
 	$Next_day/Report/Total.text = str("Total: ", coin)
 	$Menu/Money.text = str("Cashcoin: ", coin)
-	$FNF/Notes.modulate = Color(1,1,1,0)
+	
 
 ####################
 
