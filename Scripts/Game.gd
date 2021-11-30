@@ -187,6 +187,7 @@ func _on_Reactor_pressed():
 		$Diolog.show()
 		$Diolog.pause = $Diolog.paused
 		$Diolog.dialog = $Diolog.text3
+		$Diolog.awake = 1
 		$Diolog.load_dialog()
 
 
@@ -280,13 +281,13 @@ func _on_transition_timer_timeout():
 	energy = points
 	keys = out_keys
 	if level == level_1:
-		day_coin = int(rand_range(0.1 * energy, .15*energy))
+		day_coin = int(rand_range(0.06 * energy, .10*energy))
 		
 	elif level == level_2:
-		day_coin = 2*int(rand_range(0.1 * energy, .15*energy))
+		day_coin = 2*int(rand_range(0.06 * energy, .10*energy))
 
 	elif level == level_3:
-		day_coin = 3*int(rand_range(0.1 * energy, .15*energy))
+		day_coin = 3*int(rand_range(0.06 * energy, .10*energy))
 		
 		
 	coin += day_coin + bonus
@@ -300,3 +301,7 @@ func _on_transition_timer_timeout():
 
 ####################
 
+
+
+func _on_Back_pressed():
+	$"Thanks/transition".play("event2")

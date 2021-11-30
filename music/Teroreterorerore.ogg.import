@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Teroreterorerore.ogg-d91e6ecd0c7d272dd6477a10f00c26bc.oggstr"
+
+[deps]
+
+source_file="res://music/Teroreterorerore.ogg"
+dest_files=[ "res://.import/Teroreterorerore.ogg-d91e6ecd0c7d272dd6477a10f00c26bc.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

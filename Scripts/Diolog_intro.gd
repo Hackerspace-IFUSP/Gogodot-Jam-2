@@ -78,7 +78,7 @@ func dialog_events():
 	if dialog_index == dialog.size():
 		$transition.play("event")
 		yield($transition,"animation_finished")
-		get_tree().change_scene("res://Scenes/Game.tscn")
+		get_tree().change_scene("res://Scenes/Title_screen.tscn")
 		
 
 func _on_Tween_tween_completed(object, key):
@@ -95,4 +95,6 @@ func _on_Next_pressed():
 
 
 func _on_Skip_pressed():
-	get_tree().change_scene("res://Scenes/Game.tscn")
+	$transition.play("event")
+	yield($transition,"animation_finished")
+	get_tree().change_scene("res://Scenes/Title_screen.tscn")

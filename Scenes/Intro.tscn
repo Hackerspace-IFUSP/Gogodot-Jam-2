@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://Scripts/Diolog_intro.gd" type="Script" id=1]
 [ext_resource path="res://Fonts/Kid_Font_.ttf" type="DynamicFontData" id=2]
@@ -58,6 +58,12 @@ tracks/0/keys = {
 "update": 0,
 "values": [ Color( 1, 1, 1, 1 ), Color( 0, 0, 0, 1 ) ]
 }
+
+[sub_resource type="DynamicFont" id=21]
+size = 45
+outline_size = 1
+outline_color = Color( 1, 0, 0, 1 )
+font_data = ExtResource( 2 )
 
 [node name="Intro" type="Node2D"]
 
@@ -204,7 +210,7 @@ __meta__ = {
 [node name="Tween" type="Tween" parent="Diolog/Control/Dialog_box"]
 
 [node name="dialogue_timer" type="Timer" parent="Diolog/Control"]
-wait_time = 5.0
+wait_time = 7.0
 one_shot = true
 
 [node name="transition" type="AnimationPlayer" parent="Diolog"]
@@ -217,12 +223,12 @@ margin_top = 698.0
 margin_bottom = 790.0
 
 [node name="Wind6" type="Label" parent="Skip"]
-margin_left = -295.0
-margin_right = 47.0
-margin_bottom = 100.0
+margin_left = -20.0
+margin_top = -31.0
+margin_right = 210.0
+margin_bottom = 69.0
 custom_colors/font_color = Color( 1, 0, 0, 1 )
-custom_colors/font_outline_modulate = Color( 0, 0, 0, 1 )
-custom_fonts/font = SubResource( 16 )
+custom_fonts/font = SubResource( 21 )
 text = "Skip intro"
 align = 1
 valign = 1

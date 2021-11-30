@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=2]
+[gd_scene load_steps=43 format=2]
 
 [ext_resource path="res://Scenes/City.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Sprites/Objects/seta.png" type="Texture" id=2]
@@ -16,6 +16,7 @@
 [ext_resource path="res://Scripts/Diolog.gd" type="Script" id=14]
 [ext_resource path="res://Sprites/Objects/Text_box_kid.png" type="Texture" id=15]
 [ext_resource path="res://music/ping_pong_8bit_beeep.ogg" type="AudioStream" id=16]
+[ext_resource path="res://Sprites/Objects/Text_box_intro.png" type="Texture" id=17]
 
 [sub_resource type="DynamicFont" id=15]
 size = 24
@@ -381,6 +382,59 @@ outline_size = 1
 outline_color = Color( 0, 0, 1, 1 )
 font_data = ExtResource( 6 )
 
+[sub_resource type="DynamicFont" id=27]
+size = 150
+outline_size = 3
+outline_color = Color( 0, 0, 1, 1 )
+font_data = ExtResource( 6 )
+
+[sub_resource type="Animation" id=28]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=29]
+resource_name = "event"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 800, 0 ), Vector2( 0, 0 ) ]
+}
+
+[sub_resource type="Animation" id=30]
+resource_name = "event2"
+length = 0.3
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 800, 0 ) ]
+}
+
 [sub_resource type="Animation" id=25]
 length = 0.001
 tracks/0/type = "value"
@@ -535,7 +589,7 @@ pitch_scale = 1.5
 [node name="Wind" parent="FNF" instance=ExtResource( 5 )]
 position = Vector2( 77, 286 )
 scale = Vector2( 0.4, 0.4 )
-frame = 0
+frame = 3
 
 [node name="Killzone" type="Area2D" parent="FNF"]
 position = Vector2( -1, 2 )
@@ -946,13 +1000,19 @@ __meta__ = {
 position = Vector2( 397, 139 )
 texture = ExtResource( 15 )
 
+[node name="TextBox" type="Sprite" parent="Diolog/Control/Dialog_box"]
+visible = false
+position = Vector2( 397, 142.5 )
+scale = Vector2( 1, 0.7375 )
+texture = ExtResource( 17 )
+
 [node name="RichTextLabel" type="RichTextLabel" parent="Diolog/Control/Dialog_box"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 16.0
-margin_top = 12.0
-margin_right = -7.0
-margin_bottom = -9.0
+margin_left = 47.0
+margin_top = 24.0
+margin_right = -34.0
+margin_bottom = -16.0
 grow_horizontal = 0
 custom_colors/default_color = Color( 0, 0, 1, 1 )
 custom_fonts/normal_font = SubResource( 6 )
@@ -990,6 +1050,55 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Thanks" type="Node2D" parent="."]
+position = Vector2( 800, 0 )
+
+[node name="Bakcground" type="Sprite" parent="Thanks"]
+position = Vector2( 399, 400.46 )
+scale = Vector2( 0.707965, 0.495575 )
+texture = ExtResource( 3 )
+
+[node name="text" type="Label" parent="Thanks"]
+margin_left = -61.0
+margin_top = 173.0
+margin_right = 836.0
+margin_bottom = 576.0
+custom_colors/font_color = Color( 0, 0, 1, 1 )
+custom_fonts/font = SubResource( 27 )
+text = "Thanks
+for Playing"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="transition" type="AnimationPlayer" parent="Thanks"]
+reset_on_save = false
+anims/RESET = SubResource( 28 )
+anims/event = SubResource( 29 )
+anims/event2 = SubResource( 30 )
+
+[node name="Back" parent="Thanks" instance=ExtResource( 4 )]
+margin_left = 237.0
+margin_top = 642.0
+margin_right = 411.0
+margin_bottom = 734.0
+
+[node name="text" type="Label" parent="Thanks/Back"]
+margin_left = 34.0
+margin_top = 14.0
+margin_right = 151.0
+margin_bottom = 47.0
+custom_colors/font_color = Color( 0, 0, 1, 1 )
+custom_fonts/font = SubResource( 15 )
+text = "Back"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="transition" type="AnimationPlayer" parent="."]
 pause_mode = 2
 anims/RESET = SubResource( 25 )
@@ -997,7 +1106,6 @@ anims/event = SubResource( 26 )
 
 [node name="Bkg" type="AudioStreamPlayer" parent="."]
 stream = ExtResource( 13 )
-autoplay = true
 
 [connection signal="area_shape_entered" from="FNF/Notes/Left/area" to="." method="_on_area_area_shape_entered"]
 [connection signal="timeout" from="FNF/Notes/Left/left_timer" to="." method="_on_left_timer_timeout"]
@@ -1021,3 +1129,4 @@ autoplay = true
 [connection signal="pressed" from="Menu/upgrades/Buttons/Reactor" to="." method="_on_Reactor_pressed"]
 [connection signal="timeout" from="Diolog/Control/dialogue_timer" to="Diolog/Control/Dialog_box" method="_on_dialogue_timer_timeout"]
 [connection signal="pressed" from="Diolog/Next" to="Diolog" method="_on_Next_pressed"]
+[connection signal="pressed" from="Thanks/Back" to="." method="_on_Back_pressed"]

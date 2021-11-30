@@ -51,6 +51,7 @@ func load_dialog():
 
 	
 func dialog_events():
+	
 	if dialog_index == dialog.size():
 		hide()
 		pass

@@ -3,7 +3,7 @@ extends Node2D
 enum {on_dialog,out_dialog}
 var status = out_dialog
 var wait_time = 2
-
+var awake = 0
 enum{paused,runing}
 var pause = paused
 
@@ -41,10 +41,21 @@ onready var text2 = [
 ]
 
 onready var text3 = [
-	"Plot3",
-	"Plot3",
-	"Plot3",
-	"Plot3"
+	"Neil: Good job, ol’ captain sir! We have released our most important power plant. Now the city will have all the energy needs fulfilled and mine extra UCOIN to boot. Well done! Also, did you knoooow that nuclear power plants are a ",
+	"Mrs. Reneé: ...carbooon free solution as well? Just like wind, solar and hydro, but with more efficiency. The drawback is that it can have some seriooous accidents when people are careless.",
+	"Sabrina: Like UCOINS…? They, like, are very dangerous if someone tweets something weird.",
+	"Miyamoto: !!!",
+	"Mrs. Reneé: No, not like that at aaall. While nuclear can go wrong when neglected, it is very difficult for accidents to truly happen. UCOIN, on the other hand, was bound to blooow up. And so it did.",
+	"Miyamoto: W-What do you mean???",
+	"Mrs. Reneé: Earlier this morning, the UCOIN market booombed. It lost 99.95% of it’s value overnight. I just saaaw it on the internet while you solved the last questions, actually.",
+	"Miyamoto: NOOOOOOOOOOOOOOOOOOO!!!!!",
+	"Neil! Man our stations! We are being attack-",
+	"...",
+	"What’s going on??",
+	"Mrs. Reneé: Finally! Our sleeping beeeauty awakes! You missed the last task, so I have EXTRA homework for you.",
+	"No… I will never have time to play like this!",
+	"Miyamoto: It’s all those crooks at the government's fault! If they had banned all other currencies, then UCOIN would-",
+	"Hey, listen, Miyamoto. I’m whispering so Mrs. Reneé can’t hear while Sabrina monologues about radioactive waste. What if I gave you all my stash of OMEGACOIN in exchange for you doing my homework? I farmed a lot in Farmcraft. It will lose value now, but I’m sure it"
 ]
 
 
@@ -84,6 +95,9 @@ func load_dialog():
 
 	
 func dialog_events():
+	if dialog_index == 10 and awake != 0:
+		$Control/Dialog_box/TextBox.show()
+	
 	if dialog_index == dialog.size():
 		dialog_index = -1
 #		counter += 1
@@ -98,6 +112,10 @@ func dialog_events():
 		hide()
 		get_tree().paused = false 
 		button = not_pressed
+		$"../Bkg".play()
+		
+		if awake != 0:
+			$"../Thanks/transition".play("event")
 		
 
 func _on_Tween_tween_completed(object, key):
